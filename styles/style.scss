@@ -1,0 +1,626 @@
+@import url('https://fonts.googleapis.com/css?family=Raleway:400,600');
+@import url('https://fonts.googleapis.com/css?family=Jura:400,600&subset=cyrillic');
+$main-text-color: #072704;
+$main-link-color: #FF6347;
+$header-color: #6fa96a;
+$forms-border-color: #6BC868;
+$button-bgc: #4ebd4a;
+$active-link-button: #3c9b39;
+@mixin transform($rotate) {
+	-webkit-transform: rotate($rotate);
+	-moz-transform: rotate($rotate);
+	-o-transform: rotate($rotate);
+	transform: rotate($rotate);
+}
+@mixin transition($time, $direction) {
+	-webkit-transition: $time $direction;
+	-moz-transition: $time $direction;
+	-o-transition: $time $direction;
+	transition: $time $direction;
+}
+@mixin animation-delay($time) {
+	-webkit-animation-delay: $time;
+	-moz-animation-delay: $time;
+	-o-animation-delay: $time;
+	animation-delay: $time;
+}
+@mixin animation-duration($time) {
+	-webkit-animation-duration: $time;
+    -moz-animation-duration: $time;
+    -o-animation-duration: $time;
+    animation-duration: $time;
+}
+body {
+	font-family: "Raleway", sans-serif;
+	line-height: 1.6;
+	font-size: 16px;
+}
+.h2 {
+	color: $main-text-color;
+	font-size: 24px;
+	text-transform: uppercase;
+	margin: 0 0 15px;
+	letter-spacing: 1px;
+	font-weight: bold;
+}
+a:visited {
+	color: rgba(21, 7, 214, 0.88);
+}
+.first-block {	
+	height: 100vh;
+	position: relative;
+	padding-top: 20px; 	
+	box-sizing: content-box;
+	overflow: hidden;
+	background-image: url(../img/desktop.jpg);
+	background-attachment: fixed;	
+	.sitetitle {
+		display: block;		
+		position: absolute;
+		top: 34px;
+		left: 50%;
+		margin-left: -275px;
+		h3 {
+			width: 600px;
+			letter-spacing: 5px;
+			text-transform: uppercase;
+			text-align: center;
+			font-size: 15px;
+			font-weight: bold;
+		}		
+	}
+	&__center {
+		position: absolute;
+		left: 50%;
+		top: 50%;
+		margin-top: -95px;
+		margin-left: -262px;
+		h1 {
+			display: inline-block;
+			padding: 10px 35px;
+			margin-left: 71px;
+			text-transform: uppercase;
+			font-size: 2.8em;
+			font-weight: bold;
+			color: $main-text-color;
+			border: 6px solid #1f591a;
+			border-radius: 2px;
+			transition: 2s;
+
+		}
+		p {
+			color: $main-text-color;
+			font-weight: bold;
+			font-size: 15px;
+			margin: 0;
+			text-transform: uppercase;
+			letter-spacing: 5px;
+			line-height: 2;
+			text-align: center;
+			@include animation-delay(.7s);
+
+		}
+	}	
+}
+/*=============================== NAVIGATION ==========================================*/
+#nav-button {
+	width: 60px;
+	height: 60px;
+	position: fixed;
+	top: 50px;
+	right: 50px;
+	background: #000;
+	border: none;
+	overflow: hidden;
+	@include transform(0deg);
+	@include transition(.5s, ease-in-out);
+	cursor: pointer;
+	z-index: 15;
+
+	span {
+	display: block;
+	position: absolute;
+	height: 3px;
+	width: 28px;
+	float: right;
+	background: #fff;	
+	border-radius: 9px;
+	opacity: 1;
+	left: 16px;	
+	@include transform(0deg);
+	@include transition(.25s, ease-in-out);
+	}
+	span:nth-child(1) {
+		top: 20px;
+	}
+	span:nth-child(2) {
+		top: 30px;
+		outline: none;
+	}
+	span:nth-child(3) {
+		top: 40px;
+	}
+}
+#nav-button.open span:nth-child(1) {
+	top: 31px;
+	@include transform(135deg);
+}
+#nav-button.open span:nth-child(2) {
+	opacity: 0;
+	left: -60px;
+}
+#nav-button.open span:nth-child(3) {
+	top: 31px;
+	@include transform(-135deg);
+}
+.navigation {
+	display: none;
+	position: fixed;
+	width: 100%;
+	height: 100%;	
+	z-index: 10;
+	top: 0;
+	right: 0;
+	background-color: rgba(0, 0, 0, 0.85);
+	opacity: 0;
+	transition: 1s linear;
+	ul {
+		margin-top: 180px;
+		padding: 0;
+		text-align: center;
+
+		li {
+			list-style-type: none;
+			margin: 0;
+			padding: 0;
+			height: 60px;			
+			a {
+				display: inline-block;
+				width: 100%;
+				color: #fff;
+				text-transform: uppercase;
+				font-size: 12px;
+				opacity: 1;
+				outline: none;
+				height: 60px;
+				letter-spacing: 4px;
+				text-decoration: none;		
+				line-height: 60px;
+				transition-property: all;
+				transition-duration: 0.5s;
+				transition-timing-function: ease;
+				transition-delay: initial;
+				&:hover {
+					color: #FF6347;
+					background-color: rgba(255, 255, 255, 0.08);
+				}				
+			}
+		}
+		li:nth-child(1) a {
+			color: #FF6347;
+			background-color: rgba(255, 255, 255, 0.08);
+			@include animation-delay(0);
+		}
+		li:nth-child(2) a {
+			@include animation-delay(0.1s);
+		}
+		li:nth-child(3) a {
+			@include animation-delay(0.2s);
+		}
+		li:nth-child(4) a {
+			@include animation-delay(0.3s);		}
+	}
+}
+.navigation.opened {
+	display: block;	
+}
+
+/*================================ END OF NAVIGATION =================================*/
+.second-block {
+	width: 100%;
+	height: 730px;
+	padding: 70px 0 0 0;
+	margin: 0;
+	bottom: 0;
+	overflow: hidden;
+	&__header {
+		text-align: center;
+		@include animation-duration(2s);
+		h1 {
+			color: $main-text-color;
+			font-size: 24px;
+			font-weight: bold;
+			text-transform: uppercase;
+			margin-left: 0 0 40px;
+			letter-spacing: 1px;
+		}
+		&_h2 {
+			font-size: 12px;
+			text-transform: uppercase;
+			font-weight: 600;
+			margin-bottom: 130px;	
+			letter-spacing: 4px;		
+			&:before {
+				content: "";
+				position: absolute;
+				left: 50%;
+				width: 200px;
+				height: 1px;
+				margin-top: 50px;
+				margin-left: -100px;
+				background-color: #000;
+			}
+		}
+	}
+	&__img {
+		display: flex;
+		justify-content: center;
+		width: 220px;
+		height: 220px;
+		border-radius: 50%;
+		margin: 0 auto;
+
+	}
+	.about-myself__h2, .personal-inf h3, .personal-inf h2, .avatar__h2 {
+		text-align: center;
+		font-size: 12px;
+		margin: 0 0 12px;
+		letter-spacing: 3px;
+		color: $main-text-color;
+		font-weight: bold;
+		text-transform: uppercase;
+		margin-bottom: 35px;	
+	}
+	.about-myself p {
+		color: #222;
+		font-weight: normal;
+	}	
+	.personal-inf h2 {text-align: left;}
+	.personal-inf ul {
+		padding: 0;
+		float: none;
+		li {
+			list-style-type: none;			
+			a {
+				color: $main-link-color;
+			}
+		}
+	}
+	.personal-inf__social-networks li {
+		float: left;
+		margin-right: 10px; 
+		a i {
+			color: $main-link-color;
+			font-size: 20px;
+		}
+	}
+}
+.third-section {
+	padding: 0 0 70px;
+	min-height: 100vh;
+	header {
+		width: 100%;
+		height: 205px;
+		margin: 70px 0 0 0;
+		text-align: center;		
+		h3 {
+			text-transform: uppercase;
+			font-size: 12px;
+			font-weight: 600;
+			letter-spacing: 4px;
+			&:before { // Тоже надо будет сделать отдельным стилем для всез линий.
+				content: "";
+				width: 200px;
+				height: 1px;
+				position: absolute;
+				left: 50%;
+				margin: 40px 0 0 -100px;
+				background: $main-text-color;    			
+			}
+		}
+	}
+	&_education {
+		text-align: right;		
+		&_h3 {
+		margin-top: 5px;		
+		color: $main-text-color;
+		letter-spacing: 1px;
+		font-size: 16px;
+		font-weight: 600;
+		text-transform: uppercase;
+		text-align: right; // Здесь я позволил себе оставить правое выравнивание текста т.к. при равном приоритете third-section_abilities_h3 будет иметь своё собственое значение (text-align:left;) т.к. при обработке он стоит ниже.
+		}			
+		&_h4  {
+			display: inline-block;
+			line-height: 1.6;
+			background-color: $main-link-color;
+			color: #fff;
+			font-size: 14px;
+			font-weight: 600;
+			font-style: italic;
+			padding: 0 15px;
+			margin-bottom: 15px;
+		}
+	}		
+	&_abilities {
+		&:before {
+			content: "";
+			position: absolute;
+			width: 1px;
+			height: 100%;
+			background: #ccc;
+			left: 0;
+		}
+		h3 {
+			@extend .third-section_education_h3;
+			text-align: left;
+		}		
+		h4 {
+			@extend .third-section_education_h4;
+		}
+		ul {
+			padding-left: 10px;
+			li {
+				list-style-type: none;				
+				&:before {
+					content: "";
+					width: 15px;
+					height: 15px;
+					margin: 4px 5px 0 0;
+					float: left;
+					background: url(../img/check-mark-3.jpg);
+				}
+			}
+		}		
+	}
+}
+.portfolio {
+	padding: 0px 0 90px 0;
+	background-color: #222;
+	header {
+		padding: 70px 0 0 0;
+		h2 {
+			color: #fff;
+			text-align: center;
+			font-size: 26px;
+			font-weight: bold;
+			text-transform: uppercase;
+			margin: 0 0 115px;
+			letter-spacing: 1px;
+		}
+		&:before {
+			@extend .second-block__header_h2;
+			background: #fff;
+		}
+	}
+	&_wrapper {
+		position: relative;
+		width: 370px;
+	  	height: 290px;
+		.add-inf {
+			display: none;
+			width: 100%;
+			height: 100%;
+			position: absolute;
+			top: 0px;
+			left: 0px;
+			padding: 70px 0 0 0;
+			background-color: rgba(0, 0, 0, 0.8);
+			text-align: center;			
+			@include animation-duration(2s);
+			&_year {
+				display: inline-block;
+				width: 80px;
+				height: 24px;
+				position: absolute;
+				top: 0;
+				right: 0;
+				background: $main-link-color;
+				color: #fff;				
+				text-align: center;
+			}
+			h3 {
+				color: $header-color;
+				font-weight: bold;
+				letter-spacing: 3px;
+				text-transform: uppercase;
+			}
+			p {
+				color: #fff;
+				margin: 0 0 20px;
+			}
+			a {
+				display: inline-block;
+				padding: 2px 10px;
+				color: $main-link-color;
+				border: $main-link-color 1px solid;
+				text-decoration: none;
+			}
+		}
+	}
+	.col-md-4 {
+		padding: 0;
+		margin: 10px;
+		width: 370px;
+	}
+	.grid-item {
+	  width: 370px;
+	  height: 290px;
+	  padding: 0;
+	  // margin: 0 15px 15px 15px;
+	  float: left;
+	  background-position: center;
+	  -webkit-background-size: cover;
+	  background-size: cover; }
+
+	.grid-item-img-1 {
+	  background-image: url(../img/1.jpg); }
+
+	.grid-item-img-2 {
+	  background-image: url(../img/2.jpg); }
+
+	.grid-item-img-3 {
+	  background-image: url(../img/3.jpg); }
+
+	.grid-item-img-4 {
+	  background-image: url(../img/4.jpg); }	
+}
+.contacts {
+	padding: 70px 0 50px 0;
+	header {   // Надо будет сделать это общим правилом.
+		text-align: center;
+		p {
+			text-transform: uppercase;
+			font-size: 12px;
+			margin: 0 0 130px;
+			letter-spacing: 5px;
+			&:before {
+				@extend .second-block__header_h2;
+			}
+		}
+	}
+	.feedback-form {
+		padding: 0 50px 0 15px;
+		h3 {
+			margin: 20px 0;
+		}
+	}
+	.main-links {
+		padding: 0 15px 0 50px;
+		&:before {
+			@extend .third-section_abilities:before;
+		}
+	}
+	form {
+		width: 354px;
+		float: right;
+		.input-field {
+			position: relative;
+			.input-icon {
+				position: absolute;
+				top: 10px;
+				left: 15px;
+				z-index: 1;
+				.fa {
+					font-size: 16px;
+					color: #cfcfcf;					
+				}
+
+			}
+		}
+		input {
+			display: block;
+			width: 100%;
+			min-width: 350px;
+			height: 42px;
+			position: relative;	
+			padding-left: 36px;		
+			margin: 0 0 10px 0;
+			border: 1px solid #ccc;
+			outline: none;
+			font-weight: normal;
+			@include transition(.5s, ease-in-out);
+			&:hover {				
+				border-color: $forms-border-color;				
+			}
+			&:focus {
+				box-shadow: inset 0 0 3px $forms-border-color;
+				border-color: $forms-border-color;
+			}
+			&::-webkit-input-placeholder       {opacity: 1; transition: opacity 0.3s ease;}
+			&::-moz-placeholder                {opacity: 1; transition: opacity 0.3s ease;}
+			&:-moz-placeholder                 {opacity: 1; transition: opacity 0.3s ease;}
+			&:-ms-input-placeholder            {opacity: 1; transition: opacity 0.3s ease;}
+			&:focus::-webkit-input-placeholder {opacity: 0.4; transition: opacity 0.3s ease;}
+			&:focus::-moz-placeholder          {opacity: 0.4; transition: opacity 0.3s ease;}
+			&:focus:-moz-placeholder           {opacity: 0.4; transition: opacity 0.3s ease;}
+			&:focus:-ms-input-placeholder      {opacity: 0.4; transition: opacity 0.3s ease;}			
+		}
+		.textarea-field {
+			position: relative;
+			.textarea-icon {
+				position: absolute;
+				top: 10px;
+				left: 15px;
+				z-index: 1;
+				.fa {
+					font-size: 16px;
+					color: #cfcfcf;
+				}
+			}
+
+			.hint {
+				display: block;
+				width: 350px;
+				height: 40px;
+				padding: 10px 0 10px 10px;
+				color: #807979;
+				font-family: 'Jura', sans-serif;
+				font-size: 11px;
+				border: 1px solid #ccc;
+				border-top: 0;					
+			}
+		}
+		textarea {
+			display: block;
+			width: 350px;
+			height: 100px;
+			padding: 10px 0 10px 36px;			
+			resize: none;
+			outline: none;
+			@include transition(.5s, ease-in-out);			
+			&:hover {
+				border-color: $forms-border-color;
+			}
+			&:focus {
+				box-shadow: inset 0 0 3px $forms-border-color;
+				border-color: $forms-border-color;
+				height: 130px;
+			}
+		}
+		button {
+			display: inline-block;
+			margin: 25px 0 0 0;
+			cursor: pointer;
+			color: #fff;
+			font-size: 15px;
+			padding: 5px 18px;
+			text-align: center;
+			background-color: $button-bgc;
+			border: 0;
+			line-height: 1.6;
+			&:active {
+				background-color: $active-link-button;
+			}
+		}
+	}	
+	h3 {
+		text-align: left;
+		color: #000;
+		font-size: 12px;
+		letter-spacing: 3px;
+		font-weight: bold;
+		text-transform: uppercase;
+	}
+	a {
+		text-decoration: none;
+		color: $main-link-color;
+
+	}
+		
+}
+footer {
+	width: 100%;
+	height: 160px;
+	padding: 40px 0 0 0;	
+	background: url(../img/foobg.png) repeat-x;	
+	.black-container {
+		height: 120px;
+		background-color: #222;
+		padding: 50px 0;
+		p {
+			color: #fff;
+		}
+	}
+	
+}
